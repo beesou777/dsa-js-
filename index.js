@@ -1,19 +1,15 @@
 /**
- * @param {number[]} nums
+ * @param {string} s
+ * @param {string} t
  * @return {boolean}
  */
-var containsDuplicate = function (nums) {
-    const new_array = []
-    for (let arr = 0; arr < nums.length;arr++) {   
-        if (!new_array.includes(nums[arr])) {
-            new_array.push(nums[arr])
-        }else{
-            return true
-        }
-    }
-    return false
+var isAnagram = function(s, t) {
+   let a = s.split('').sort().join()
+   let b = t.split('').sort().join()
+   if(a == b){
+    return true
+   }
+   return false
 };
 
-console.log(containsDuplicate([2,3,4,4,4]))
-
-
+console.log(isAnagram("anagram","nagraam"))
