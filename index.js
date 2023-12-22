@@ -1,20 +1,26 @@
 /**
  * @param {number[]} nums
- * @param {number} k
- * @return {number[]}
+ * @return {number}
  */
-var topKFrequent = function(nums, k) {
-    const contaier ={}
-    for(let i = 0;i < nums.length;i++){
-        // const sort = reSorted(nums[i])
-        if(!contaier[nums[i]]){
-            contaier[nums[i]] = [nums[i]]
-        }else{
-            contaier[nums[i]].push(nums[i])
+var longestConsecutive = function (nums) {
+    if (nums.length <= 1) {
+        return nums.length;
+    }
+
+    const container = [...new Set(nums)].sort((a,b)=> a -b)
+
+    let count = 1, max = 1
+    for (let i = 0; i < container.length; i++) {
+        if (container[i] - container[i - 1] === 1) {
+            count += 1
+            max = Math.max(max, count)
+        } else if (container[i] == container[i - 1]) {
+            continue
+        } else {
+            count = 1
         }
     }
-    const result = Object.values(contaier).sort((a,b)=> b.length - a.length)
-    return result.slice(0,k).flatMap(arr => arr[0])
+    return max;
 };
 
-console.log(topKFrequent([1],1))
+console.log(longestConsecutive([0, -1])); // Output: 2
