@@ -1,22 +1,20 @@
 /**
- * @param {string[]} strs
- * @return {string[][]}
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
  */
-var groupAnagrams = function (strs) {
-    const anagramMap = {}
-    for (let i = 0; i < strs.length; i++) {
-        const sorted = reorder(strs[i])
-        if(!anagramMap[sorted]){
-            anagramMap[sorted] = [strs[i]]
+var topKFrequent = function(nums, k) {
+    const contaier ={}
+    for(let i = 0;i < nums.length;i++){
+        // const sort = reSorted(nums[i])
+        if(!contaier[nums[i]]){
+            contaier[nums[i]] = [nums[i]]
         }else{
-            anagramMap[sorted].push(strs[i])
+            contaier[nums[i]].push(nums[i])
         }
     }
-    const result = Object.values(anagramMap)
-    return result
+    const result = Object.values(contaier).sort((a,b)=> b.length - a.length)
+    return result.slice(0,k).flatMap(arr => arr[0])
 };
 
-const reorder = (str) => (
-    str.split('').sort().join('')
-)
-
+console.log(topKFrequent([1],1))
